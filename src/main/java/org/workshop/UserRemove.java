@@ -1,16 +1,19 @@
 package org.workshop;
-import org.workshop.UserDao;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet(name = "Servlet", value = "/user/list")
-public class UserList extends HttpServlet {
+@WebServlet(name = "UserRemove", value = "/user/remove")
+public class UserRemove extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //request.getRequestDispatcher(request.getContextPath() + "/users/list.jsp").forward(request, response);
+//request.getRequestDispatcher(request.getContextPath() + "/users/list.jsp").forward(request, response);
+        String idS = request.getParameter("id");
+        int id = Integer.parseInt(idS);
+        UserDao.delete(id);
         try {
             User[] users = UserDao.findAll();
             for (User u : users) {
@@ -20,8 +23,8 @@ public class UserList extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        response.sendRedirect(request.getContextPath() +"/user/list");
 
-        getServletContext().getRequestDispatcher(request.getContextPath() +"/users/list.jsp").forward(request, response);
     }
 
     @Override

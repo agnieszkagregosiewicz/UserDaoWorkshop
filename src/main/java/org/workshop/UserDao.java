@@ -1,11 +1,10 @@
 package org.workshop;
 import org.mindrot.jbcrypt.BCrypt;
-import org.workshop.User;
 
 import java.sql.*;
 import java.util.Arrays;
 
-public class UserDAO {
+public class UserDao {
     private static final String CREATE_QUERY = "INSERT INTO workshop.users (name, password, email) VALUES (?, ?, ?)";
     private static final String FIND_QUERY = "SELECT * FROM workshop.users WHERE id=?";
     private static final String DELETE_QUERY = "DELETE FROM workshop.users WHERE id=?";
@@ -42,7 +41,7 @@ public class UserDAO {
             if (resultSet.next()) {
                 user.setId(resultSet.getInt("id"));
                 user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString(hashPassword("password")));
+                user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
             } else {
                 return null;
@@ -77,8 +76,10 @@ public class UserDAO {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
+                System.out.println(user.getId());
                 user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString(hashPassword("password")));
+                System.out.println(user.getName());
+                user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
                 users = Arrays.copyOf(users, users.length + 1);
                 users[users.length - 1] = user;

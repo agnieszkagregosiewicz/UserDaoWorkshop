@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <head>
 
@@ -77,7 +79,7 @@
 
         <!-- Sidebar Message -->
         <div class="sidebar-card d-none d-lg-flex">
-            <img class="sidebar-card-illustration mb-2" src="../theme/img/undraw_rocket.svg" alt="...">
+            <img class="sidebar-card-illustration mb-2" src="theme/img/undraw_rocket.svg" alt="...">
             <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and
                 more!</p>
             <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
@@ -86,17 +88,17 @@
     </ul>
     <!-- End of Sidebar -->
 
+    <!-- Topbar -->
+    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+    </nav>
+    <!-- End of Topbar -->
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
+
         <!-- Main Content -->
         <div id="content">
-
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-            </nav>
-            <!-- End of Topbar -->
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -104,40 +106,70 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                    <a href="http://localhost:8070/user/add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-download fa-sm text-white-50"></i> Dodaj Użytkownika</a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Akcja</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Akcja</th>
+                            </tr>
+                            </tfoot>
+                            <tbody>
+                                <c:forEach var="item" items="${users}">
+                                <tr>
+                                    <td>${item.id}</td>
+                                    <td>${item.name}</td>
+                                    <td>${item.email}</td>
+                                    <td><a href = "http://localhost:8070/user/remove?id=${item.id}">Usuń</a>
+                                        <a href = "http://localhost:8070/user/edit?id=${item.id}">Edit</a>
+                                        <a href = "http://localhost:8070/user/show?id=${item.id}">Pokaż</a></td>
+                                </tr>
+                                </c:forEach>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <!-- Content Row -->
                 <div class="row">
-
-
                 </div>
 
                 <div class="col-lg-6 mb-4">
-
                 </div>
                 <!-- End of Main Content -->
 
                 <!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
+                <%@ include file="/footer.jsp" %>
                 <!-- End of Footer -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Page Content -->
         </div>
+        <!-- End of Main Content -->
     </div>
+    <!-- End of Content Wrapper -->
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 </div>
+<!-- End of Page Wrapper -->
 </body>
 
 </html>
