@@ -20,7 +20,7 @@ public class UserEdit extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name = request.getParameter("name");
+        String[] name = request.getParameterValues("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         //String id = request.getParameter("id");
@@ -28,7 +28,7 @@ public class UserEdit extends HttpServlet {
 //            response.getWriter().append("Pola nie mogą być puste");
 //            getServletContext().getRequestDispatcher(request.getContextPath() + "/users/add.jsp").forward(request, response);
 //        } else {
-        user.setName(name);
+        user.setName(String.valueOf(name));
         user.setPassword(password);
         user.setEmail(email);
         user.setId((int) request.getSession().getAttribute("id"));

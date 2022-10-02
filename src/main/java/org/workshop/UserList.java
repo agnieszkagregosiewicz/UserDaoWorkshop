@@ -11,11 +11,6 @@ import java.sql.SQLException;
 public class UserList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //Object message = request.getSession().getAttribute("message");
-        //if (message != null ) {
-         //   response.getWriter().append(message.toString());
-        //}
-
         try {
             request.setAttribute("users", UserDao.findAll());
         } catch (SQLException e) {
@@ -23,6 +18,7 @@ public class UserList extends HttpServlet {
         }
 
         getServletContext().getRequestDispatcher(request.getContextPath() + "/users/list.jsp").forward(request, response);
+        request.getSession().setAttribute("message", null);
     }
 
     @Override

@@ -14,15 +14,7 @@ public class UserRemove extends HttpServlet {
         String idS = request.getParameter("id");
         int id = Integer.parseInt(idS);
         UserDao.delete(id);
-        try {
-            User[] users = UserDao.findAll();
-            for (User u : users) {
-                System.out.println(u);
-            }
-            request.setAttribute("users", UserDao.findAll());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        request.getSession().setAttribute("message", "Usunięto użytkownika o id: " + idS);
         response.sendRedirect(request.getContextPath() +"/user/list");
 
     }
