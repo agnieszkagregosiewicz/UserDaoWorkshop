@@ -11,16 +11,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>UserDAO - Dashboard</title>
+    <title>User show</title>
 
     <!-- Custom fonts for this template-->
-    <link href="../theme/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/theme/css/sb-admin-2.css"/>" rel="stylesheet" type="text/css">
     <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="../theme/css/sb-admin-2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<c:url value="/theme/css/sb-admin-2.css"/>" rel="stylesheet">
 
 </head>
 
@@ -33,7 +33,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/user/list">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -77,25 +77,19 @@
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
 
-        <!-- Sidebar Message -->
-
 
     </ul>
     <!-- End of Sidebar -->
-
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
 
         <!-- Main Content -->
         <div id="content">
+
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
+
             </nav>
             <!-- End of Topbar -->
 
@@ -104,42 +98,35 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">User CRUD</h1>
-                    <a href="add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                    <a href="/add"
+                       class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                             class="fas fa-download fa-sm text-white-50"></i> Dodaj Użytkownika</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
+                            <body>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Akcja</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Akcja</th>
-                            </tr>
-                            </tfoot>
-                            <tbody>
-                                <c:forEach var="item" items="${users}">
-                                <tr>
-                                    <td>${item.id}</td>
-                                    <td>${item.name}</td>
-                                    <td>${item.email}</td>
-                                    <td><a href = "remove?id=${item.id}">Usuń</a>
-                                        <a href = "edit?id=${item.id}">Edit</a>
-                                        <a href = "show?id=${item.id}">Pokaż</a></td>
-                                </tr>
-                                </c:forEach>
+                                <td><b>ID</b></td>
 
-                            </tbody>
+                                <td>${user.id}</td>
+                            </tr>
+
+                            </body>
+                            <body>
+                            <tr>
+                                <td><b>Nazwa</b></td>
+                                <td>${user.name}</td>
+                            </tr>
+
+                            </body>
+                            <body>
+                            <tr>
+                            <td><b>Email</b></td>
+                                <td>${user.email}</td>
+                            </tr>
+                            </body>
                         </table>
                     </div>
                 </div>

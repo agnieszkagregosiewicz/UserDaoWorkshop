@@ -1,4 +1,5 @@
 package org.workshop;
+
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
@@ -54,15 +55,16 @@ public class UserDao {
 
     public static void update(User user) throws IndexOutOfBoundsException {
         try (Connection conn = DbUtil.getConnection()) {
-            if (exist(user.getId())) {
-                PreparedStatement preparedStmt = conn.prepareStatement(UPDATE_QUERY);
-                preparedStmt.setString(1, user.getName());
-                preparedStmt.setString(2, hashPassword(user.getPassword()));
-                preparedStmt.setString(3, user.getEmail());
-                preparedStmt.setInt(4, user.getId());
-                preparedStmt.executeUpdate();
-                System.out.println("Update done.");
-            } else throw new IndexOutOfBoundsException("Id " + user.getId() + " does not exist.");
+            //   if (exist(user.getId())) {
+
+            PreparedStatement preparedStmt = conn.prepareStatement(UPDATE_QUERY);
+            preparedStmt.setString(1, user.getName());
+            preparedStmt.setString(2, hashPassword(user.getPassword()));
+            preparedStmt.setString(3, user.getEmail());
+            preparedStmt.setInt(4, user.getId());
+            preparedStmt.executeUpdate();
+            System.out.println("Update done.");
+            // } else throw new IndexOutOfBoundsException("Id " + user.getId() + " does not exist.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,9 +78,7 @@ public class UserDao {
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                System.out.println(user.getId());
                 user.setName(resultSet.getString("name"));
-                System.out.println(user.getName());
                 user.setPassword(resultSet.getString("password"));
                 user.setEmail(resultSet.getString("email"));
                 users = Arrays.copyOf(users, users.length + 1);
